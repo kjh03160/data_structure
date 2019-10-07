@@ -127,6 +127,7 @@ def compute_postfix(postfix):
 
 
 # 아래 세 줄은 수정하지 말 것!
-expr = input()
-value = compute_postfix(infix_to_postfix(get_token_list(expr)))
-print(value)
+# expr = input()
+# value = compute_postfix(infix_to_postfix(get_token_list(expr)))
+# print(value)
+print(infix_to_postfix("(3+2)/(2-1)*2"))

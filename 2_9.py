@@ -33,6 +33,27 @@ def reverse(link):
 
     return link
 
+def reverse1(link):
+    now = link.head
+    prev = None
+    next = now.next
+
+    for i in range(link.size):
+        if next != None:
+            next_tem = next
+            now.next = prev
+
+            next_tem.next = next.next
+
+            prev = now
+            now = next_tem
+            next = next_tem.next
+
+    now.next = prev
+    link.head = now
+
+    return link
+
 if __name__ == '__main__':
     s = Slist()
     s.insert_front(7)

@@ -23,6 +23,6 @@ class Queue:
             print(i ,'->', end=" ")
         print('end')
 
-q = Queue()
-q.enqueue(1)
-q.print_queue()
+# q = Queue()
+# q.enqueue(1)
+# q.print_queue()
