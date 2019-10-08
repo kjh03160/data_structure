@@ -20,7 +20,7 @@ class Slist:
         self.head = new_node
         self.size += 1
 
-    def push_back(self, key, val = None):
+    def push_back(self, key, val = None):                       # 만약 Node에서 tail에 관한 정보를 init 해놨다면 O(1)시간!
         new_node = Node(key, val)
         tail = self.head
         if not(tail):
