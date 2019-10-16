@@ -51,15 +51,18 @@ class Clist:
 
     def pushFront(self, key):   # O(1)
         self.insertAfter(self.head, key)
+        self.size += 1
 
     def pushBack(self, key):    # O(1)
         self.insertBefore(self.head, key)
+        self.size += 1
 
     def remove(self, x):        # O(1)
         if x == None or self.head == x: # 아무 값이 없는게 들어오거나 더미 노드(헤드)를 지워달라고 하면
             return
         x.prev.next = x.next
         x.next.prev = x.prev
+        self.size -= 1
 
     def popFront(self):     # O(1)
         self.remove(self.head.next)
@@ -75,3 +78,22 @@ class Clist:
 
     def search(self, x):    # 더미노드로 다시 오면 한바퀴 돌았다는 것 O(1)
         pass
+
+    def print_list(self):
+        if self.size == 0:
+            print("비어있음")
+        else:
+            tail = self.head
+            print(tail.next.key)
+            while tail.next != self.head:
+                print(tail.key,"> ",end="")
+                tail = tail.next
+            print(tail.key)
+
+
+c = Clist()
+c.pushBack(1)
+c.pushBack(2)
+c.pushBack(3)
+c.pushBack(4)
+c.print_list()

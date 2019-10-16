@@ -30,28 +30,27 @@ def get_token_list(expr):
     for i in expr:
         if len(i.strip()) == 0:
             continue
-        if i in "+*^-/()":
+        if i in "+-*^/()":
             if not (len(conjunction) == 0):
                 result_list.append(str(float(conjunction)))
             conjunction = ""
             try:
                 if (len(result_list) == 0 and i == "-"):
                     conjunction += i
-                elif (result_list[-1] in "(+/*" and i == "-"):
+                elif (result_list[-1] in "(+/*^" and i == "-"):
                     conjunction += i
                 else:
                     result_list.append(i)
-
             except:
                 result_list.append(i)
             continue
         else:
             conjunction += i
+
     try:
         result_list.append(str(float(conjunction)))
     except:
         pass
-
     return result_list
 
 
@@ -97,7 +96,7 @@ def infix_to_postfix(token_list):
 
 def compute_postfix(postfix):
     stack = Stack()
-    split_= postfix
+    split_ = postfix
     for i in split_:
         if i == "(" or i == ")":
             continue
@@ -119,7 +118,7 @@ def compute_postfix(postfix):
                 stack.push(result)
             else:
                 result = first ** second
-                stack.push(float(result))
+                stack.push(result)
         else:
             stack.push(float(i))
 
@@ -130,4 +129,6 @@ def compute_postfix(postfix):
 # expr = input()
 # value = compute_postfix(infix_to_postfix(get_token_list(expr)))
 # print(value)
-print(infix_to_postfix("(3+2)/(2-1)*2"))
+a = infix_to_postfix(get_token_list("(3^2+2)/(2.2-1.2)*2"))
+print(a)
+print(compute_postfix(a))

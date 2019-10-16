@@ -71,6 +71,6 @@ def infix_to_postfix(infix):
     return " ".join(outstack)
 
 
-infix_expr = "3 + 2 ^ 4 / ( 6 - 1 )"
+infix_expr = "3 + 2 ^ 4 / ( 6 - 1 ) * 1"
 postfix_expr = infix_to_postfix(infix_expr)
 print(postfix_expr)
