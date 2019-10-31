@@ -14,7 +14,7 @@ def Josephus(n, k):
             # print(refer)
             refer = refer.next
             if refer.key == None:
-                continue
+                refer = refer.next
             target += 1
         refer_key = refer
         refer = refer.next
@@ -25,4 +25,4 @@ def Josephus(n, k):
 
 # n, k = map(int, input().split())
 # print(n, k)
-print(Josephus(1, 1))
+print(Josephus(6, 3))
