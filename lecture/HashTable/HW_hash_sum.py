@@ -77,26 +77,26 @@ class HashOpenAddr:
 
 result = int(input())
 cand = input().split()
-print(cand)
-print(len(cand))
+# print(cand)
+# print(len(cand))
 count = 0
 
 H = HashOpenAddr(int(len(cand) * 1.5))
 for i in cand:
     H.set(int(i))
-print(H)
+# print(H)
 for i in H:
-    if i == None or result // 2 == result - i:
+    if i == None or result / 2 == result - i:
         continue
     find_key = result - i
     value = H.search(find_key)
     if value == None:
         continue
-    print("val : %d find : %d result : %d" % (i, value, result))
+    # print("val : %d find : %d result : %d" % (i, value, result))
 
     count += 1
     H.remove(value)
     H.remove(i)
-    print(H)
+    # print(H)
 
 print(count)
