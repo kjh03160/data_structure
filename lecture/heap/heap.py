@@ -42,7 +42,51 @@ A[0] 과 A[-1]을 바꿈 > 그럼 맨 마지막 15는 정렬 된 상태  n을 �
 O(n log n)
 
 def heap_sort:
+    n = len(A)
     for k in range(len(A) - 1, -1, -1):
         A[0], A[k] = A[k], A[0]
+        n -= 1
         heapify_down(0, n) # A[0]번 힙 성질 맞추기, n은 A 리스트의 길이
+
+def heapify_up(k):  # O(log n)
+# A[k]를 위로 올라가면서 위치 찾기
+# 자기 부모를 찾아가면서 본인보다 작으면 자리 바꾼다.
+    while k > 0 and A[k] >= A[(k-1)//2]:
+    A[k], A[(k-1)//2] = A[(k-1)//2], A[k]
+    k = (k - 1) // 2
+
+
+
+def insert(key):
+ # append(key)가 우선 실행됨 -> 힙 조건 성립 안될 수 있음
+ # 이건 올라가면서 맞춰줘야 된다.
+    A.append(key)   # A는 힙 리스트
+    heapify_up(len(A) - 1)      # 인덱스를 값으로 넘겨준다
+
+
+def deleteMax(A):    # Max 값 찾아서 리턴해주고 지워달라 O(log n)
+    if len(A) == 0: return None
+    key = A[0]
+    A[0], A[-1] = A[-1], A[0]
+    A.pop()
+    heapify_down(0, len(A))
+    return key
+
+Min_Heap > 부등호만 바꾸자
+
+파이썬에선 이미 구현되어 있음
+import heapq  >>> Min Heap
+h = []
+heappush(h, key) => insert
+만약 key 값을 음수로 넣어버리면 Max heap 처럼 할 수 있다.
+
+heappop(h)  => deleteMin
+heapify(A)  => make_heap
+h[0] => 최솟값
+
+
+
+Max, Min 값을 찾는데 가장 효율적
+만약 어떤 값을 찾는데 사용하는 것은 좋지 않음
+
 '''
