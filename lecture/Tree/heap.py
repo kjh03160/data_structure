@@ -1,4 +1,4 @@
-# make heap
+# make Tree
 # heapify-down을 이용하여
 
 '''
@@ -78,7 +78,7 @@ Min_Heap > 부등호만 바꾸자
 import heapq  >>> Min Heap
 h = []
 heappush(h, key) => insert
-만약 key 값을 음수로 넣어버리면 Max heap 처럼 할 수 있다.
+만약 key 값을 음수로 넣어버리면 Max Tree 처럼 할 수 있다.
 
 heappop(h)  => deleteMin
 heapify(A)  => make_heap
