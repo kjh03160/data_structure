@@ -101,15 +101,21 @@ set 함수를 이용해 학생들의 key 값과 짝이 되는 중간고사 점�
 H = HashOpenAddr(80)
 stid = open("student_id.txt", "r")
 value = open("hashed_score.txt", "r")
+
 st_list = []
 value_list = []
+
 for i in stid:
     st_list.append(int(i.strip()))
+
 for i in value:
     if i.isdigit():
         value_list.append(float(i.strip()))
     else:
         value_list.append(i.strip())
+
+stid.close()
+value.close()
 
 length = len(st_list)
 index = 0
