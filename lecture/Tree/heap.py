@@ -90,3 +90,65 @@ Max, Min 값을 찾는데 가장 효율적
 만약 어떤 값을 찾는데 사용하는 것은 좋지 않음
 
 '''
+
+
+class Heap:
+    def __init__(self, L=[]):
+        self.A = L
+
+    def __str__(self):
+        return str(self.A)
+
+    def heapify_down(self, k, n):   # A[k]를 밑으로 내려보내기 n은 Heap의 크기
+        while 2 * k + 1 < n:
+            left_node = 2 * k + 1
+            right_node = 2 * k + 2
+            if self.A[k] < self.A[left_node]:
+                m = left_node
+            else:
+                m = k
+
+            if right_node < n and self.A[m] < self.A[right_node]:
+                m = right_node
+
+            if m != k:
+                self.A[k], self.A[m] = self.A[m], self.A[k]
+                k = m
+            else:
+                break
+
+    def make_heap(self):
+        n = len(self.A)
+        for k in range((n // 2) - 1, -1, -1):  # (n // 2) - 1 는 마지막 반은 leaf이기 때문에 저렇게 넣어도 됨.
+            self.heapify_down(k, n)
+
+    def heap_sort(self):
+        n = len(self.A)
+        for k in range(n - 1, -1, -1):
+            self.A[0], self.A[k] = self.A[k], self.A[0]
+            n -= 1
+            # print(self.A)
+            self.heapify_down(0, n)  # A[0]번 힙 성질 맞추기, n은 A 리스트의 길이
+
+S = [int(x) for x in input().split()]
+H = Heap(S)
+H.make_heap()
+print(H)
+
+H.heap_sort()
+print(H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

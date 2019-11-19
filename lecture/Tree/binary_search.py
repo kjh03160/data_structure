@@ -110,3 +110,18 @@ class BST:
         :return:
         '''
         pass
+
+    def number(self, v):    # 자신을 포함해서 자손이 몇개 있는지
+        pass
+
+    def succ(self, x):      # x노드의 키 값 다음으로 큰 노드 찾기
+        '''
+        x 노드의 오른쪽으로 가서 왼쪽 밑으로 계속 내려감
+        만약 오른쪽 노드가 없다면 parent로 올라가기
+        자식이 부모의 왼쪽 노드일 때까지 올라가야함
+        그러면 그 부모가 successor
+        '''
+        pass
+
+    def pred(self, x):      # x노드 키 값 다음으로 작은 노드 찾기
+        pass
