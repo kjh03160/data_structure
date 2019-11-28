@@ -1,5 +1,8 @@
 from .binary_search import BST
 
+# height <= 1.44 log n
+
+
 class AVL(BST):
     def insert(self, k):    # height 조건이 깨지면 조치를 취해야 함 > O(log n)
         v = super(AVL, self).insert(k)
