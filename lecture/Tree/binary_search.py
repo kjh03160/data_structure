@@ -41,6 +41,8 @@ class BST:
                 v = v.right
         return None
 
+
+
     def find_location(self, key):   # search, hash_table의 find_slot 과 비슷 O(h)
         if self.size == 0:
             return None
