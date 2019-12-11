@@ -130,7 +130,7 @@ class Heap:
             # print(self.A)
             self.heapify_down(0, n)  # A[0]번 힙 성질 맞추기, n은 A 리스트의 길이
 
-S = [int(x) for x in input().split()]
+S = [3,4,5,32,62,32,3,345,454,3]
 H = Heap(S)
 H.make_heap()
 print(H)

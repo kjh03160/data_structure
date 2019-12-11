@@ -103,54 +103,36 @@ class BST:
         self.size -= 1
 
     def deleteByCopying(self, x):
-        a, b, parent = x.left, x.right, x.parent
-        if a:
-            cand_node = a
-            while cand_node.right != None:
-                cand_node = cand_node.right
+        left = v.left
+        right = v.right
+        parent = v.parent
 
-        elif b:
-            cand_node = b
-            while cand_node.left != None:
-                cand_node = cand_node.left
-        else:
-            cand_node = None
-
-        if cand_node:
-            x.key = cand_node.key
-            # if a == cand_node:
-            # 		x.left = cand_node.left
-            # if b == cand_node:
-            # 		x.right = cand_node.right
-
-            if cand_node == cand_node.parent.left:
-                if b == cand_node.parent:
-                    cand_node.parent.left = cand_node.right
-                else:
-                    cand_node.parent.left = cand_node.left
-
-                if cand_node.left:
-                    cand_node.left.parent = cand_node.parent
-
+        if left == None:
+            if right:
+                v.key = right.key
+                v.right = right.right
             else:
-                if a == cand_node.parent:
-                    cand_node.parent.right = cand_node.left
+                if parent:
+                    if v == parent.right:
+                        parent.right = None
+                    else:
+                        parent.left = None
                 else:
-                    cand_node.parent.right = cand_node.right
-
-                if cand_node.right:
-                    cand_node.right.parent = cand_node.parent
+                    self.root = None
 
         else:
-            if x == self.root:
-                self.root = None
-            else:
-                if x == parent.right:
-                    parent.right = None
+            m = left
+            while m.right != None:
+                m = m.right
+            v.key = m.key
 
-                else:
-                    parent.left = None
-            x.parent = None
+            if m == m.parent.right:
+                m.parent.right = m.left
+            else:
+                m.parent.left = m.left
+            if m.left:
+                m.left.parent = m.parent
+
         self.size -= 1
 
     def height(self, x):
@@ -225,66 +207,67 @@ class BST:
             self.root = x
 
 
-T = BST()
-while True:
-    cmd = input().split()
-    if cmd[0] == 'insert':
-        v = T.insert(int(cmd[1]))
-        print("+ {0} is inserted".format(v.key))
-    elif cmd[0] == 'deleteC':
-        v = T.search(int(cmd[1]))
-        T.deleteByCopying(v)
-        print("- {0} is deleted by copying".format(int(cmd[1])))
-    elif cmd[0] == 'deleteM':
-        v = T.search(int(cmd[1]))
-        T.deleteByMerging(v)
-        print("- {0} is deleted by merging".format(int(cmd[1])))
-    elif cmd[0] == 'search':
-        v = T.search(int(cmd[1]))
-        if v == None:
-            print("* {0} is not found!".format(cmd[1]))
-        else:
-            print(" * {0} is found!".format(cmd[1]))
-    elif cmd[0] == 'height':
-        h = T.height(T.search(int(cmd[1])))
-        if h == -1:
-            print("* {0} is not found!".format(cmd[1]))
-        else:
-            print(" * key {0} has height of {1}".format(cmd[1], h))
-    elif cmd[0] == 'number':
-        num = T.number(T.search(int(cmd[1])))
-        if num == 0:
-            print("* {0} is not found!".format(cmd[1]))
-        else:
-            print(" * key {0} has {1} descendants".format(cmd[1], num))
-    elif cmd[0] == 'Rleft':
-        z = T.search(int(cmd[1]))
-        if z == None:
-            print("* {0} is not found!".format(cmd[1]))
-        else:
-            T.rotateLeft(z)
-            print(" * Rotated left at node {0}".format(cmd[1]))
+if __name__ == "__main__":
+    T = BST()
+    while True:
+        cmd = input().split()
+        if cmd[0] == 'insert':
+            v = T.insert(int(cmd[1]))
+            print("+ {0} is inserted".format(v.key))
+        elif cmd[0] == 'deleteC':
+            v = T.search(int(cmd[1]))
+            T.deleteByCopying(v)
+            print("- {0} is deleted by copying".format(int(cmd[1])))
+        elif cmd[0] == 'deleteM':
+            v = T.search(int(cmd[1]))
+            T.deleteByMerging(v)
+            print("- {0} is deleted by merging".format(int(cmd[1])))
+        elif cmd[0] == 'search':
+            v = T.search(int(cmd[1]))
+            if v == None:
+                print("* {0} is not found!".format(cmd[1]))
+            else:
+                print(" * {0} is found!".format(cmd[1]))
+        elif cmd[0] == 'height':
+            h = T.height(T.search(int(cmd[1])))
+            if h == -1:
+                print("* {0} is not found!".format(cmd[1]))
+            else:
+                print(" * key {0} has height of {1}".format(cmd[1], h))
+        elif cmd[0] == 'number':
+            num = T.number(T.search(int(cmd[1])))
+            if num == 0:
+                print("* {0} is not found!".format(cmd[1]))
+            else:
+                print(" * key {0} has {1} descendants".format(cmd[1], num))
+        elif cmd[0] == 'Rleft':
+            z = T.search(int(cmd[1]))
+            if z == None:
+                print("* {0} is not found!".format(cmd[1]))
+            else:
+                T.rotateLeft(z)
+                print(" * Rotated left at node {0}".format(cmd[1]))
+                T.inorder(T.root)
+                print()
+        elif cmd[0] == 'Rright':
+            z = T.search(int(cmd[1]))
+            if z == None:
+                print("* {0} is not found!".format(cmd[1]))
+            else:
+                T.rotateRight(z)
+                print(" * Rotated right at node {0}".format(cmd[1]))
+                T.inorder(T.root)
+                print()
+        elif cmd[0] == 'preorder':
+            T.preorder(T.root)
+            print()
+        elif cmd[0] == 'postorder':
+            T.postorder(T.root)
+            print()
+        elif cmd[0] == 'inorder':
             T.inorder(T.root)
             print()
-    elif cmd[0] == 'Rright':
-        z = T.search(int(cmd[1]))
-        if z == None:
-            print("* {0} is not found!".format(cmd[1]))
+        elif cmd[0] == 'exit':
+            break
         else:
-            T.rotateRight(z)
-            print(" * Rotated right at node {0}".format(cmd[1]))
-            T.inorder(T.root)
-            print()
-    elif cmd[0] == 'preorder':
-        T.preorder(T.root)
-        print()
-    elif cmd[0] == 'postorder':
-        T.postorder(T.root)
-        print()
-    elif cmd[0] == 'inorder':
-        T.inorder(T.root)
-        print()
-    elif cmd[0] == 'exit':
-        break
-    else:
-        print("* not allowed command. enter a proper command!")
+            print("* not allowed command. enter a proper command!")
